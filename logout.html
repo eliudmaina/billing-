@@ -1,0 +1,128 @@
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FREE ISP RADIUS</title>
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="-1">
+    <link rel="stylesheet" href="css/fast0ne.css" />
+    <link rel="stylesheet" href="css/newOne.css" />
+    <style>
+        h1 {
+            color: rgb(230, 0, 19);
+        }
+        
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        #customers td,
+        #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        
+        #customers tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+        
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+        
+        form input {
+            padding: 15px;
+            margin-left: 5px;
+            border: 0px transparent;
+            cursor: pointer;
+            color: white;
+            border-radius: 30px;
+            padding: 10px 40px;
+            font-family: "Poppins", sans-serif;
+            font-size: 16px;
+            font-weight: 200;
+            text-decoration: none;
+            background: black;
+            margin-bottom: 5%;
+            background-position: 100% 0;
+            background-size: 200% 200%;
+            margin-top: 2%;
+            box-shadow: 0 16px 32px 0 rgba(0, 40, 120, 0.35);
+            transition: all 0.5s ease;
+        }
+    </style>
+    <script>
+        function openLogin() {
+            if (window.name != 'hotspot_logout') return true;
+            open('$(link-login)', '_blank', '');
+            window.close();
+            return false;
+        }
+    </script>
+</head>
+
+<body>
+    <section class="header">
+        <div class="xlx2">
+            <div class="title">FIRST ISP RADIUS</div>
+        </div>
+    </section>
+    <section class="actions-strata">
+        <div class="ie-fixMinHeight">
+            <div class="main">
+                <div class="wrap">
+                    <h1>You have just logged out!</h1>
+                    <table id="customers">
+                        <tr>
+                            <td>Username</td>
+                            <td>$(username)</td>
+                        </tr>
+                        <tr>
+                            <td>IP address</td>
+                            <td>$(ip)</td>
+                        </tr>
+                        <tr>
+                            <td>MAC address</td>
+                            <td>$(mac)</td>
+                        </tr>
+                        <tr>
+                            <td>Session time</td>
+                            <td>$(uptime)</td>
+                        </tr>
+                        $(if session-time-left)
+                        <tr>
+                            <td>Time left</td>
+                            <td>$(session-time-left)</td>
+                        </tr>
+                        $(endif)
+                        <tr>
+                            <td>Bytes up / down:</td>
+                            <td>$(bytes-in-nice) / $(bytes-out-nice)</td>
+                        </tr>
+                    </table>
+
+
+                    <form action="$(link-login)" name="login" onSubmit="return openLogin()">
+                        <input type="submit" value="Log in">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</body>
+
+</html>

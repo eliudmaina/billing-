@@ -1,0 +1,156 @@
+<html>
+
+<head>
+    $(if refresh-timeout)
+    <meta http-equiv="refresh" content="$(refresh-timeout-secs)"> $(endif)
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FIRST ISP RADIUS</title>
+    <link rel="stylesheet" href="css/fast0ne.css" />
+    <link rel="stylesheet" href="css/newOne.css" />
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="-1">
+    <script>
+        $(
+            if advert - pending == 'yes')
+        var popup = '';
+
+        function focusAdvert() {
+            if (window.focus) popup.focus();
+        }
+
+        function openAdvert() {
+            popup = open('$(link-advert)', 'hotspot_advert', '');
+            setTimeout("focusAdvert()", 1000);
+        }
+        $(endif)
+
+        function openLogout() {
+            if (window.name != 'hotspot_status') return true;
+            open('$(link-logout)', 'hotspot_logout', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=280,height=250');
+            window.close();
+            return false;
+        }
+    </script>
+    <style>
+        h1 {
+            color: rgb(7, 107, 7);
+        }
+        
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        #customers td,
+        #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        
+        #customers tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        #customers tr:hover {
+            background-color: #ddd;
+        }
+        
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+        
+        form input {
+            padding: 15px;
+            margin-left: 5px;
+            border: 0px transparent;
+            cursor: pointer;
+            color: white;
+            border-radius: 30px;
+            padding: 10px 40px;
+            font-family: "Poppins", sans-serif;
+            font-size: 16px;
+            font-weight: 200;
+            text-decoration: none;
+            background: black;
+            margin-bottom: 5%;
+            background-position: 100% 0;
+            background-size: 200% 200%;
+            margin-top: 2%;
+            box-shadow: 0 16px 32px 0 rgba(0, 40, 120, 0.35);
+            transition: all 0.5s ease;
+        }
+    </style>
+
+</head>
+
+<body $(if advert-pending=='yes' ) onLoad="openAdvert()" $(endif)>
+    <section class="header">
+        <div class="xlx2">
+            <div class="title">FIRST ISP RADIUS</div>
+        </div>
+    </section>
+    <section class="actions-strata">
+        <div class="ie-fixMinHeight">
+            <div class="main">
+                <div class="wrap">
+                    $(if login-by == 'trial')
+                    <h1>Hi, trial user!</h1>
+                    $(elif login-by != 'mac')
+                    <h1>Hi, $(username)!</h1>
+                    $(endif)
+
+                    <form action="$(link-logout)" name="logout" onSubmit="return openLogout()">
+                        <table id="customers">
+                            <tr>
+                                <td>IP address</td>
+                                <td>$(ip)</td>
+                            </tr>
+                            <tr>
+                                <td>Bytes up / down</td>
+                                <td>$(bytes-in-nice) / $(bytes-out-nice)</td>
+                            </tr>
+                            $(if session-time-left)
+                            <tr>
+                                <td>Connected / left</td>
+                                <td>$(uptime) / $(session-time-left)</td>
+                            </tr>
+                            $(else)
+                            <tr>
+                                <td>Connected</td>
+                                <td>$(uptime)</td>
+                            </tr>
+                            $(endif) $(if blocked == 'yes')
+                            <tr>
+                                <td>Status</td>
+                                <td>
+                                    <a href="$(link-advert)" target="hotspot_advert">Advertisement required</a>
+                                </td>
+                            </tr>
+                            $(elif refresh-timeout)
+                            <tr>
+                                <td>Status refresh</td>
+                                <td>$(refresh-timeout)</td>
+                            </tr>
+                            $(endif)
+                        </table>
+                        $(if login-by-mac != 'yes')
+                        <!-- user manager link. if user manager resides on other router, replace $(hostname) by its address
+                        <button onclick="document.location='http://$(hostname)/user?subs='; return false;">status</button>
+                        <!-- end of user manager link -->
+                        <input type="submit" value="Log out"> $(endif)
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>
